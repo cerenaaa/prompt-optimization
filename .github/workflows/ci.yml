@@ -9,4 +9,5 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install numpy pytest
-      - run: python -c "from optimizers.variant_runner import PromptVariant; v=PromptVariant('test','sys','{input}'); print(v.render('hello')); print('OK')"
+      - run: python -c "from optimizers.variant_runner import PromptVariant, EvalSample; v=PromptVariant('test','sys','Answer: {input}'); assert v.render('hello')=='Answer: hello'; print('variant OK')"
+      - run: python -c "from optimizers.few_shot_optimizer import FewShotExample; e=FewShotExample('hello','world'); assert 'hello' in e.format(); print('few_shot OK')"
